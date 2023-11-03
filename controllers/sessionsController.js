@@ -33,11 +33,15 @@ router.get('/saveAccessTokens', (req, res) => {
         res.send(error, 500);
       }
       else {
+        console.log("token1", req.header('oauth_token'));
         req.session.oauthAccessToken = oauthAccessToken;
         req.session.oauthAccessTokenSecret = oauthAccessTokenSecret
-        console.log("saved ", oauthAccessToken)
         return res.send({ message: 'token saved' });
       }
     });
 });
+router.post('/add', (req, res) => {
+  console.log('/add', req.header('token'))
+  return res.send({ token: req.header('token') });
+})
 module.exports = router;
